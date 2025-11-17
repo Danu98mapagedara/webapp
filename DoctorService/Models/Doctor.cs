@@ -8,14 +8,6 @@ namespace DoctorService.Models
         public string Phone { get; set; } = "";
         public string Specialty { get; set; } = "";
 
-        public List<Slot> Slots { get; set; } = new();
-    }
-    public class Slot
-    {
-        public int Id { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public int DoctorId { get; set; }
-        public Doctor? Doctor { get; set; } 
+
     }
 }

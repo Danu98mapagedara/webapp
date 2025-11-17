@@ -8,7 +8,6 @@ namespace PatientService.Data
         public PatientDbContext(DbContextOptions<PatientDbContext> options) : base(options)
         {
         }
-
         public DbSet<Patient> Patients { get; set; }
     }
 }

@@ -24,11 +24,7 @@ namespace DoctorService.Services
                 Email = doctor.Email,
                 Phone = doctor.Phone,
                 Specialty = doctor.Specialty,
-                Slots = doctor.Slots.Select(slot => new AvailableSlotDto
-                {
-                    StartTime = slot.StartTime,
-                    EndTime = slot.EndTime
-                }).ToList()
+
             };
         }
     }
