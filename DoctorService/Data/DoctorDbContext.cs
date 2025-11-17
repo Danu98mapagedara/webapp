@@ -10,7 +10,7 @@ namespace DoctorService.Data
         }
 
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<AvailableSlot> AvailableSlots { get; set; }
+        public DbSet<Slot> Slots { get; set; }
  
  
    protected override void OnModelCreating(ModelBuilder modelBuilder)

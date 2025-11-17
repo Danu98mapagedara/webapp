@@ -1,11 +1,9 @@
   using DoctorService.Data;
  using DoctorService.Models;
 using Microsoft.EntityFrameworkCore;
+
 namespace DoctorService.Services
 {
-  
-
-
     public class DoctorServiceClass
     {
         private readonly DoctorDbContext _context;
