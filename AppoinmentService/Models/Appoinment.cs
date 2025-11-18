@@ -9,5 +9,5 @@ public class Appoinment
     public TimeOnly StartTime { get; set; }
     public TimeOnly EndTime { get; set; }
 
-    public string Status { get; set; } = "Booked";
+    public string Status { get; set; } 
 }

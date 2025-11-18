@@ -27,5 +27,36 @@ namespace DoctorService.Services
 
             };
         }
+        // Get all doctors from db
+        public async Task<List<DoctorDto>> GetAllDoctorsAsync()
+        {
+            var doctors = await _context.Doctors.ToListAsync();
+            return doctors.Select(doc => new DoctorDto
+            {
+                Name = doc.Name,
+                Email = doc.Email,
+                Phone = doc.Phone,
+                Specialty = doc.Specialty,
+            }).ToList();
+        }
+        // Delete doctor by id
+        public async Task<DoctorDto> DeleteDoctorAsync(int id)
+        {
+            var doctor = await _context.Doctors.FindAsync(id);
+            if (doctor == null)
+            {
+                 throw new KeyNotFoundException("Doctor not found");
+            }
+            _context.Doctors.Remove(doctor);
+            await _context.SaveChangesAsync();
+            return new DoctorDto
+            {
+                Name = doctor.Name,
+                Email = doctor.Email,
+                Phone = doctor.Phone,
+                Specialty = doctor.Specialty,
+            };
+           
+        }
     }
 }
