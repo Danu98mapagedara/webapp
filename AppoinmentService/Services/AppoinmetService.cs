@@ -4,11 +4,11 @@ namespace AppoinmentService.Services
     using AppoinmentService.Data;
     using Microsoft.EntityFrameworkCore;
 
-    public class AppoinmetService
+    public class AppoinmetServiceClass
     {
         private readonly AppoinmentDbContext _context;
 
-        public AppoinmetService(AppoinmentDbContext context)
+        public AppoinmetServiceClass(AppoinmentDbContext context)
         {
             _context = context;
         }
@@ -37,7 +37,12 @@ namespace AppoinmentService.Services
 
         public async Task<Appoinment> GetAppoinmentByIdAsync(int id)
         {
-            return await _context.Appoinments.FindAsync(id);
+            var appoinment = await _context.Appoinments.FindAsync(id);
+            if (appoinment == null)
+            {
+                throw new KeyNotFoundException("Appoinment not found");
+            }   
+            return appoinment;
         }
 
        

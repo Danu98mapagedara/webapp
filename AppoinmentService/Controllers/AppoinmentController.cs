@@ -9,9 +9,9 @@ namespace AppoinmentService.Controllers
     [Route("api/[controller]")]
     public class AppoinmentController : ControllerBase
     {
-        private readonly AppoinmetService _appoinmetService;
+        private readonly AppoinmetServiceClass _appoinmetService;
 
-        public AppoinmentController(AppoinmetService appoinmetService)
+        public AppoinmentController(AppoinmetServiceClass appoinmetService)
         {
             _appoinmetService = appoinmetService;
         }
@@ -38,10 +38,6 @@ namespace AppoinmentService.Controllers
             }
             return Ok(appoinment);
         }
-
-       
-
-     
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAppoinment(int id)
