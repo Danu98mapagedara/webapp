@@ -22,5 +22,21 @@ namespace PatientService.Controllers
             var savedPatient = await _patientService.SavePatientAsync(patient);
             return Ok(savedPatient);
         }
+        [HttpGet]
+        public async Task<ActionResult<List<PatientDto>>> GetAllPatients()
+        {
+            var patients = await _patientService.GetAllPatientsAsync();
+            return Ok(patients);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PatientDto>> GetPatientById(int id)
+        {
+            var patient = await _patientService.GetPatientByIdAsync(id);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient);
+        }
     }
 }
