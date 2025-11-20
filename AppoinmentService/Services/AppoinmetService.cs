@@ -14,6 +14,21 @@ namespace AppoinmentService.Services
         }
  public async Task<AppoinmentDto> AddAppoinmentAsync(Appoinment appt)
 {
+            bool patientDoctorExists = await _context.Appoinments.AnyAsync(a => a.PatientId == appt.PatientId && a.DoctorId == appt.DoctorId);
+            if (patientDoctorExists)
+            {
+                throw new InvalidOperationException("An appointment for this patient with this doctor already exists.");
+    }
+    bool doctorOvelapped=await  _context.Appoinments.AnyAsync(a =>
+            a.DoctorId == appt.DoctorId &&
+            a.AppointmentDate == appt.AppointmentDate &&
+            appt.StartTime < a.EndTime &&
+            appt.EndTime > a.StartTime
+        );
+    if (doctorOvelapped)
+    {
+        throw new InvalidOperationException("The doctor has another appointment that overlaps with the requested time.");
+    }
     _context. Appoinments.Add(appt);
     await _context.SaveChangesAsync();
 
