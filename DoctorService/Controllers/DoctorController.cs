@@ -31,6 +31,18 @@ namespace DoctorService.Controllers
             var doctors = await _doctorService.GetAllDoctorsAsync();
             return Ok(doctors);
         }
+    
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DoctorDto>> GetDoctorById(int id)
+        {
+            var doctor = await _doctorService.GetDoctorByIdAsync(id);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            return Ok(doctor);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDoctor(int id)
         {

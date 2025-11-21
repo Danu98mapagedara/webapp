@@ -1,11 +1,14 @@
 using AppoinmentService.Data;
 using AppoinmentService.Services;
 using Microsoft.EntityFrameworkCore;
+using AppoinmentService.Kafka;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+// Register KafkaProducer as singleton
+builder.Services.AddSingleton(new KafkaProducer("localhost:9092"));
 
 //add mysql db
 builder.Services.AddDbContext<AppoinmentDbContext>(options =>

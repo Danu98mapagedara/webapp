@@ -39,13 +39,29 @@ namespace DoctorService.Services
                 Specialty = doc.Specialty,
             }).ToList();
         }
+        //get doc by id
+        public async Task<DoctorDto> GetDoctorByIdAsync(int id)
+        {
+            var doctor = await _context.Doctors.FindAsync(id);
+            if (doctor == null)
+            {
+                throw new KeyNotFoundException("Doctor not found");
+            }
+            return new DoctorDto
+            {
+                Name = doctor.Name,
+                Email = doctor.Email,
+                Phone = doctor.Phone,
+                Specialty = doctor.Specialty,
+            };
+        }
         // Delete doctor by id
         public async Task<DoctorDto> DeleteDoctorAsync(int id)
         {
             var doctor = await _context.Doctors.FindAsync(id);
             if (doctor == null)
             {
-                 throw new KeyNotFoundException("Doctor not found");
+                throw new KeyNotFoundException("Doctor not found");
             }
             _context.Doctors.Remove(doctor);
             await _context.SaveChangesAsync();
@@ -56,7 +72,7 @@ namespace DoctorService.Services
                 Phone = doctor.Phone,
                 Specialty = doctor.Specialty,
             };
-           
+
         }
     }
 }
