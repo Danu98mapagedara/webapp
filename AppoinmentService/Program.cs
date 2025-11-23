@@ -10,6 +10,10 @@ builder.Services.AddControllers();
 // Register KafkaProducer as singleton
 builder.Services.AddSingleton(new KafkaProducer("localhost:9092"));
 
+builder.Services.AddHttpClient("DoctorService", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5184"); // DoctorService URL
+});
 //add mysql db
 builder.Services.AddDbContext<AppoinmentDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),

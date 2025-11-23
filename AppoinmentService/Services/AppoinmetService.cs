@@ -10,11 +10,12 @@ namespace AppoinmentService.Services
     {
         private readonly AppoinmentDbContext _context;
         private readonly KafkaProducer _kafkaProducer;
-
-        public AppoinmetServiceClass(AppoinmentDbContext context, KafkaProducer kafkaProducer)
+private readonly HttpClient _doctorClient;
+        public AppoinmetServiceClass(AppoinmentDbContext context, KafkaProducer kafkaProducer, IHttpClientFactory httpClientFactory)
         {
             _context = context;
             _kafkaProducer = kafkaProducer;
+            _doctorClient = httpClientFactory.CreateClient("DoctorService");
         }
 
         public async Task<AppoinmentDto> AddAppoinmentAsync(Appoinment appt)
@@ -63,16 +64,42 @@ namespace AppoinmentService.Services
         {
             return await _context.Appoinments.ToListAsync();
         }
-        //get appinment  by id
-        public async Task<Appoinment> GetAppoinmentByIdAsync(int id)
+       public async Task<AppointmentResponseDto> GetAppointmentByIdAsync(int id)
+{
+    var appointment = await _context.Appoinments.FindAsync(id);
+    if (appointment == null)
+        throw new KeyNotFoundException("Appointment not found");
+
+    // Fetch doctor details (from DoctorService)
+    DoctorDto? doctor = null;
+    
+
+    try
+    {
+        var doctorResponse = await _doctorClient.GetAsync($"/api/doctors/{appointment.DoctorId}");
+
+        if (doctorResponse.IsSuccessStatusCode)
         {
-            var appoinment = await _context.Appoinments.FindAsync(id);
-            if (appoinment == null)
-            {
-                throw new KeyNotFoundException("Appoinment not found");
-            }
-            return appoinment;
+            doctor = await doctorResponse.Content.ReadFromJsonAsync<DoctorDto>();
         }
+    }
+    catch
+    {
+        // doctor = null → doctor not found or service down
+    }
+
+    return new AppointmentResponseDto
+    {
+        Id = appointment.Id,
+        PatientId = appointment.PatientId,
+        DoctorId = appointment.DoctorId,
+        AppointmentDate = appointment.AppointmentDate,
+        StartTime = appointment.StartTime,
+        EndTime = appointment.EndTime,
+        Status = appointment.Status,
+        DoctorName = doctor?.Name ?? "Unknown Doctor"
+    };
+}
 
 
 

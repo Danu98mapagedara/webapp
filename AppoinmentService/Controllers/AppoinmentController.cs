@@ -31,7 +31,7 @@ namespace AppoinmentService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Appoinment>> GetAppoinmentById(int id)
         {
-            var appoinment = await _appoinmetService.GetAppoinmentByIdAsync(id);
+            var appoinment = await _appoinmetService. GetAppointmentByIdAsync(id);
             if (appoinment == null)
             {
                 return NotFound();

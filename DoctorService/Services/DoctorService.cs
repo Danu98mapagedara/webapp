@@ -33,6 +33,7 @@ namespace DoctorService.Services
             var doctors = await _context.Doctors.ToListAsync();
             return doctors.Select(doc => new DoctorDto
             {
+                Id =doc.Id,
                 Name = doc.Name,
                 Email = doc.Email,
                 Phone = doc.Phone,
@@ -49,6 +50,7 @@ namespace DoctorService.Services
             }
             return new DoctorDto
             {
+                Id = doctor.Id,
                 Name = doctor.Name,
                 Email = doctor.Email,
                 Phone = doctor.Phone,

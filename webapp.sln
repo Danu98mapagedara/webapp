@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppoinmentService", "Appoin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService", "NotificationService\NotificationService.csproj", "{2EC9A8EF-5A3D-49E1-B86D-34BD4E64A8A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\AuthService.csproj", "{0ADEEC32-BBAA-4809-ABC9-798ECC83AC56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2EC9A8EF-5A3D-49E1-B86D-34BD4E64A8A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC9A8EF-5A3D-49E1-B86D-34BD4E64A8A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC9A8EF-5A3D-49E1-B86D-34BD4E64A8A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ADEEC32-BBAA-4809-ABC9-798ECC83AC56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADEEC32-BBAA-4809-ABC9-798ECC83AC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ADEEC32-BBAA-4809-ABC9-798ECC83AC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADEEC32-BBAA-4809-ABC9-798ECC83AC56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
